@@ -182,3 +182,93 @@ def game_dict():
             ]
         }
     }
+
+data = game_dict()
+
+def num_points_per_game(name):
+#     Build a function, `num_points_per_game()` that takes in an argument of a
+# player's name and returns the number of points per game for that player.
+
+    for player in data["home"]["players"]:
+        if player["name"] == name:
+            return player["points_per_game"]
+    
+    # Search in away team
+    for player in data["away"]["players"]:
+        if player["name"] == name:
+            return player["points_per_game"]
+            
+    return "Player not found"
+
+print(num_points_per_game("Bradley Beal"))
+
+def player_age(name):
+# Build a function, `player_age()`, that takes in an argument of a player's name
+# and returns that player's age.
+    for player in data["home"]["players"]:
+        if player["name"] == name:
+            return player["age"]
+    for player in data["away"]["players"]:
+        if player["name"] ==  name:
+            return player["age"]
+        
+print(player_age("Bradley Beal"))
+
+def team_colors(team_name):
+# Build a function, `team_colors()`, that takes in an argument of the team name
+# and returns a `list` of that team's colors.
+
+#search in home team
+    if data["home"]["team_name"] == team_name:
+        return data["home"]["colors"]
+    elif data["away"]["team_name"]:
+        return data["away"]["colors"]
+    else: 
+        return "team not found"
+    
+print(team_colors("Washington Wizards"))
+
+def team_names():
+#  Build a function, `team_names()`, that operates on the dictionary to return a
+# `list` of the team names.
+
+    teams_list = [data["home"]["team_name"], data["away"]["team_name"]]
+
+    return teams_list
+print(team_names())
+
+def player_numbers(team_name):
+    
+# Build a function, `player_numbers()`, that takes in an argument of a team name
+# and returns a `list` of the jersey numbers for that team.
+    jersey_number = list()
+
+    if data["home"]["team_name"] == team_name:
+        for player in data["home"]["players"]:
+            jersey_number.append(player["number"])
+        return jersey_number    
+    elif data["away"]["team_name"] == team_name:
+        for player in data["away"]["players"]:
+            jersey_number.append(player["number"])
+        return jersey_number    
+        
+    else:
+        return "Team not found"
+print(player_numbers("Cleveland Cavaliers"))
+
+def player_stats(player_name):
+# Build a function, `player_stats()`, that takes in an argument of a player's name
+# and returns a dictionary of that player's stats.
+    for player in data["home"]["players"]:
+        if player["name"] ==  player_name:
+            return player
+    for player in data["away"]["players"]:
+        if player["name"] ==  player_name:
+            return player
+    return "Player not found"
+
+print(player_stats("Jarrett Allen"))
+
+       
+    
+    
