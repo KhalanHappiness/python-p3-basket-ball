@@ -269,6 +269,50 @@ def player_stats(player_name):
 
 print(player_stats("Jarrett Allen"))
 
+def average_rebounds_by_shoe_brand():
+# Build a function, `average_rebounds_by_shoe_brand()`, that will calculate the
+# average number of rebounds for players who wear a particular shoe brand. The
+# function should print out a message for each brand using the following format:
+
+# ```console
+# "<Brand>": average_rebounds
+# ```
+    # Dictionary to store rebounds by shoe brand
+    brand_rebounds = {}
+    
+    # Process home team players
+    for player in data["home"]["players"]:
+        if "shoe_brand" in player:
+            shoe_brand = player["shoe_brand"]
+            rebounds = player.get("rebounds_per_game", 0)
+            
+            if shoe_brand not in brand_rebounds:
+                brand_rebounds[shoe_brand] = {"total": 0, "count": 0}
+            
+            brand_rebounds[shoe_brand]["total"] += rebounds
+            brand_rebounds[shoe_brand]["count"] += 1
+    
+    # Process away team players
+    for player in data["away"]["players"]:
+        if "shoe_brand" in player:
+            shoe_brand = player["shoe_brand"]
+            rebounds = player.get("rebounds_per_game", 0)
+            
+            if shoe_brand not in brand_rebounds:
+                brand_rebounds[shoe_brand] = {"total": 0, "count": 0}
+            
+            brand_rebounds[shoe_brand]["total"] += rebounds
+            brand_rebounds[shoe_brand]["count"] += 1
+    
+    # Print results for each brand
+    for brand, stats in brand_rebounds.items():
+        average = stats["total"] / stats["count"] if stats["count"] > 0 else 0
+        print(f"{brand}: {average:.2f}")
+
+average_rebounds_by_shoe_brand()
+
+
+
        
     
     
